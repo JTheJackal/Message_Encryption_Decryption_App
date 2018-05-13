@@ -26,6 +26,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -41,8 +42,13 @@ public class main extends Application implements EventHandler<ActionEvent>{
 	private final static int fontSize = 16;
 	private final static String font = "georgia";
 	
-	private final static String menuBGCol = "#212121";
-	private final static String contentBGCol = "#013243";
+	//private final static String menuBGCol = "#70708f";353b48
+	private final static String menuBGCol = "#2f3640";
+	//private final static String contentBGCol = "#013243";
+	private final static String contentBGCol = "#273c75";
+	private final static String elementBGCol = "#011223";
+	private final static String paintCol = "#CCCCCC";
+
 	
 	private Button button;
 	private final Background menuBG = new Background( new BackgroundFill( Color.web( menuBGCol ), CornerRadii.EMPTY, Insets.EMPTY ) );
@@ -63,7 +69,10 @@ public class main extends Application implements EventHandler<ActionEvent>{
 		
 		button = new Button("Encrypt");
 		button.setOnAction(this);
-		button.setMinSize(150, 150);;
+		button.setMinSize(150, 140);
+		button.setStyle("-fx-font: " + fontSize + " " + font + "; " +
+				 "-fx-background-color: " + menuBGCol + "; " +
+				 "-fx-text-box-border: transparent;");
 		
 		//The main layout for the window.
 		BorderPane layout = new BorderPane();
@@ -82,8 +91,8 @@ public class main extends Application implements EventHandler<ActionEvent>{
 		
 		//Set up the grid properties
 		content.setHgap(10);
-		content.setVgap(10);
-		content.setPadding(new Insets(10, 10, 10, 10));
+		content.setVgap(25);
+		content.setPadding(new Insets(25, 10, 10, 10));
 		content.setBackground(contentBG);
 		
 		//Set up content elements
@@ -92,20 +101,35 @@ public class main extends Application implements EventHandler<ActionEvent>{
 		Text secretKeyTXT = new Text("Enter a secret key.");
 		
 		//Set font sizes for text elements.
-		encryptTXT.setStyle("-fx-font: " + fontSize + " " + font + ";");
-		typeTXT.setStyle("-fx-font: " + fontSize + " " + font + ";");
-		secretKeyTXT.setStyle("-fx-font: " + fontSize + " " + font + ";");
+		encryptTXT.setStyle("-fx-font: " + fontSize + " " + font + "; ");
+		encryptTXT.setFill(javafx.scene.paint.Paint.valueOf(paintCol));
+		typeTXT.setStyle("-fx-font: " + fontSize + " " + font + "; ");
+		typeTXT.setFill(javafx.scene.paint.Paint.valueOf(paintCol));
+		secretKeyTXT.setStyle("-fx-font: " + fontSize + " " + font + "; ");
+		secretKeyTXT.setFill(javafx.scene.paint.Paint.valueOf(paintCol));		
 		
 		TextField encryptInput = new TextField();
-		encryptInput.setMinSize(630, 100);
+		encryptInput.setMinSize(580, 100);
+		encryptInput.setMaxSize(630, 100);
+		encryptInput.setStyle("-fx-font: " + fontSize + " " + font + "; " +
+		 "-fx-control-inner-background: " + elementBGCol + "; " +
+		 "-fx-text-box-border: transparent;");
 		
 		TextField secretKeyInput = new TextField();
 		secretKeyInput.setMaxSize(100, 50);
 		secretKeyInput.setMinSize(100, 50);
+		secretKeyInput.setStyle("-fx-font: " + fontSize + " " + font + "; " +
+				 "-fx-control-inner-background: " + elementBGCol + "; " +
+				 "-fx-text-box-border: transparent;");
 		
 		ChoiceBox typeChoice = new ChoiceBox(FXCollections.observableArrayList("Simple", "RSA"));
 		typeChoice.setMaxSize(100, 50);
 		typeChoice.setMinSize(100, 50);
+		typeChoice.setStyle("-fx-font: " + fontSize + " " + font + "; " +
+				 "-fx-control-inner-background: " + elementBGCol + "; " +
+				 "-fx-background-color: " + elementBGCol + "; " +
+				 "-fx-text-fill: " + paintCol + "; ");
+		
 		
 		//Add content to the grid
 		content.add(encryptTXT, 0, 0, 5, 1);
@@ -114,7 +138,7 @@ public class main extends Application implements EventHandler<ActionEvent>{
 		content.add(secretKeyTXT, 1, 4);
 		content.add(typeChoice, 0, 5);
 		content.add(typeTXT, 1, 5);
-		content.add(button, 4, 8);
+		content.add(button, 4, 6);
 		
 		content.setHalignment(button, HPos.RIGHT);
 		
